@@ -38,6 +38,7 @@ const AdminPanel = ({ products, setProducts }) => {
   return (
     <div>
       <h1>Admin Panel</h1>
+
       <div>
         <input
           className="form-control"
@@ -66,25 +67,27 @@ const AdminPanel = ({ products, setProducts }) => {
         <button onClick={addProduct}>Add</button>
       </div>
 
-      <ul>
-        {products.map((p) => (
-          <li key={p.id}>
-            <Link to={`/products/${p.id}`}>{p.name}</Link>
-            <button
-              className="float-right"
-              onClick={() => editProduct(p.id)}
-            >
+      {products.map((p) => (
+        <div className="col-12" key={p.id}>
+          <div>
+            <Link to={`/products/${p.id}`}>
+              <div className="row">
+                <img src={p.image} alt={p.name} />
+                <div>
+                  <h3>{p.name}</h3>
+                  <p>₹{p.price}</p>
+                </div>
+              </div>
+            </Link>
+            <button className="float-right" onClick={() => editProduct(p.id)}>
               Edit
             </button>
-            <button
-              className="float-right"
-              onClick={() => deleteProduct(p.id)}
-            >
+            <button className="float-right" onClick={() => deleteProduct(p.id)}>
               Delete
             </button>
-          </li>
-        ))}
-      </ul>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
